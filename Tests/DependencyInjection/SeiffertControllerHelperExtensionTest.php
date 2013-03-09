@@ -81,4 +81,29 @@ class SeiffertControllerHelperExtensionTest extends \PHPUnit_Framework_TestCase
         $tag = $tags[0];
         $this->assertEquals('seiffert.helper.controller', $tag['broker']);
     }
+
+    public function testExtensionProvidesFlashMessageHelper()
+    {
+        $containerBuilder = new ContainerBuilder();
+
+        $this->extension->load(array(), $containerBuilder);
+
+        $this->assertTrue($containerBuilder->hasDefinition('seiffert.helper.controller.flash_message'));
+        $definition = $containerBuilder->getDefinition('seiffert.helper.controller.flash_message');
+
+        $this->assertEquals(
+            'Seiffert\ControllerHelperBundle\Helper\FlashMessageHelper',
+            $containerBuilder->getParameter(str_replace('%', '', $definition->getClass()))
+        );
+        $this->assertCount(1, $definition->getArguments());
+
+        $routerReference = new Reference('session', ContainerInterface::IGNORE_ON_INVALID_REFERENCE);
+        $this->assertEquals($routerReference, $definition->getArgument(0));
+
+        $tags = $definition->getTag('seiffert.helper');
+        $this->assertCount(1, $tags);
+
+        $tag = $tags[0];
+        $this->assertEquals('seiffert.helper.controller', $tag['broker']);
+    }
 }
