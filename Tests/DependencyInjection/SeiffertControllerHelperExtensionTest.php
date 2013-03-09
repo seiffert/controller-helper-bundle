@@ -56,4 +56,29 @@ class SeiffertControllerHelperExtensionTest extends \PHPUnit_Framework_TestCase
         $tag = $tags[0];
         $this->assertEquals('seiffert.helper.controller', $tag['broker']);
     }
+
+    public function testExtensionProvidesTemplateHelper()
+    {
+        $containerBuilder = new ContainerBuilder();
+
+        $this->extension->load(array(), $containerBuilder);
+
+        $this->assertTrue($containerBuilder->hasDefinition('seiffert.helper.controller.template'));
+        $definition = $containerBuilder->getDefinition('seiffert.helper.controller.template');
+
+        $this->assertEquals(
+            'Seiffert\ControllerHelperBundle\Helper\TemplateHelper',
+            $containerBuilder->getParameter(str_replace('%', '', $definition->getClass()))
+        );
+        $this->assertCount(1, $definition->getArguments());
+
+        $routerReference = new Reference('templating', ContainerInterface::IGNORE_ON_INVALID_REFERENCE);
+        $this->assertEquals($routerReference, $definition->getArgument(0));
+
+        $tags = $definition->getTag('seiffert.helper');
+        $this->assertCount(1, $tags);
+
+        $tag = $tags[0];
+        $this->assertEquals('seiffert.helper.controller', $tag['broker']);
+    }
 }

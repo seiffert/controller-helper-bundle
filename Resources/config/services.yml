@@ -1,9 +1,16 @@
 parameters:
     seiffert.helper.controller.router.class: Seiffert\ControllerHelperBundle\Helper\RouterHelper
+    seiffert.helper.controller.template.class: Seiffert\ControllerHelperBundle\Helper\TemplateHelper
 
 services:
     seiffert.helper.controller.router:
         class: %seiffert.helper.controller.router.class%
         arguments: [ @?router ]
+        tags:
+            - { name: seiffert.helper, broker: seiffert.helper.controller }
+
+    seiffert.helper.controller.template:
+        class: %seiffert.helper.controller.template.class%
+        arguments: [ @?templating ]
         tags:
             - { name: seiffert.helper, broker: seiffert.helper.controller }
