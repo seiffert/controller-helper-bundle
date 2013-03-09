@@ -60,6 +60,29 @@ class TemplateHelperTest extends \PHPUnit_Framework_TestCase
         $this->helper->render('foo');
     }
 
+    public function testRenderViewCallsTemplatingEngine()
+    {
+        $template = 'test';
+        $variables = array('foo' => 'bar');
+        $result = 'testfoobar';
+
+        $this->getMockTemplatingEngine()
+            ->expects($this->once())
+            ->method('render')
+            ->with($template, $variables)
+            ->will($this->returnValue($result));
+
+        $this->assertSame($result, $this->helper->renderView($template, $variables));
+    }
+
+    public function testRenderViewRequiresTemplatingEngine()
+    {
+        $this->helper = new TemplateHelper();
+
+        $this->setExpectedException('Seiffert\ControllerHelperBundle\Exception\MissingDependencyException');
+        $this->helper->renderView('foo');
+    }
+
     /**
      * @return EngineInterface|\PHPUnit_Framework_MockObject_MockObject
      */

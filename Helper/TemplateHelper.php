@@ -45,4 +45,19 @@ class TemplateHelper implements HelperInterface
 
         return $this->templatingEngine->renderResponse($template, $arguments, $response);
     }
+
+    /**
+     * @param string $template
+     * @param array $arguments
+     * @return string
+     * @throws MissingDependencyException
+     */
+    public function renderView($template, $arguments = array())
+    {
+        if (null === $this->templatingEngine) {
+            throw new MissingDependencyException('No templating engine present.');
+        }
+
+        return $this->templatingEngine->render($template, $arguments);
+    }
 }
