@@ -5,6 +5,7 @@ namespace Seiffert\ControllerHelperBundle\Tests\Helper;
 use Seiffert\ControllerHelperBundle\Helper\TemplateHelper;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * @covers Seiffert\ControllerHelperBundle\Helper\TemplateHelper
@@ -81,6 +82,20 @@ class TemplateHelperTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException('Seiffert\ControllerHelperBundle\Exception\MissingDependencyException');
         $this->helper->renderView('foo');
+    }
+
+    public function testStreamReturnsResponse()
+    {
+        $response = new StreamedResponse();
+        $this->assertSame($response, $this->helper->stream('foo', array(), $response));
+    }
+
+    public function testStreamRequiresTemplatingEngine()
+    {
+        $this->helper = new TemplateHelper();
+
+        $this->setExpectedException('Seiffert\ControllerHelperBundle\Exception\MissingDependencyException');
+        $this->helper->stream('foo');
     }
 
     /**
