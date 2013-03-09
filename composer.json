@@ -4,7 +4,8 @@
     "require": {
         "php": ">=5.3.3",
         "seiffert/helper-bundle": "dev-master",
-        "symfony/security": "*"
+        "symfony/security": "*",
+        "symfony/form": "*"
     },
     "require-dev": {
         "phpmd/phpmd": "1.4.0",
