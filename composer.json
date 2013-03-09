@@ -1,0 +1,25 @@
+{
+    "name": "seiffert/controller-helper-bundle",
+    "description": "This bundle provides some basic helpers for controllers.",
+    "require": {
+        "php": ">=5.3.3",
+        "seiffert/helper-bundle": "dev-master"
+    },
+    "require-dev": {
+        "phpmd/phpmd": "1.4.0",
+        "pdepend/pdepend": "1.1.0",
+        "squizlabs/php_codesniffer": "*",
+        "phpunit/phpunit": "3.7.*",
+        "phpunit/php-code-coverage": "1.2.*",
+        "phpunit/php-timer": "1.0.4"
+    },
+    "autoload": {
+        "psr-0": {
+            "Seiffert\\ControllerHelperBundle": ""
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "target-dir": "Seiffert/ControllerHelperBundle"
+}
