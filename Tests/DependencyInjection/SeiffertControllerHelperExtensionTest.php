@@ -3,6 +3,9 @@
 namespace Seiffert\ControllerHelperBundle\Tests\DependencyInjection;
 
 use Seiffert\ControllerHelperBundle\DependencyInjection\SeiffertControllerHelperExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @covers Seiffert\ControllerHelperBundle\DependencyInjection\SeiffertControllerHelperExtension
@@ -27,5 +30,30 @@ class SeiffertControllerHelperExtensionTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertInstanceOf('Symfony\Component\HttpKernel\DependencyInjection\Extension', $this->extension);
+    }
+
+    public function testExtensionProvidesRouterHelper()
+    {
+        $containerBuilder = new ContainerBuilder();
+
+        $this->extension->load(array(), $containerBuilder);
+
+        $this->assertTrue($containerBuilder->hasDefinition('seiffert.helper.controller.router'));
+        $definition = $containerBuilder->getDefinition('seiffert.helper.controller.router');
+
+        $this->assertEquals(
+            'Seiffert\ControllerHelperBundle\Helper\RouterHelper',
+            $containerBuilder->getParameter(str_replace('%', '', $definition->getClass()))
+        );
+        $this->assertCount(1, $definition->getArguments());
+
+        $routerReference = new Reference('router', ContainerInterface::IGNORE_ON_INVALID_REFERENCE);
+        $this->assertEquals($routerReference, $definition->getArgument(0));
+
+        $tags = $definition->getTag('seiffert.helper');
+        $this->assertCount(1, $tags);
+
+        $tag = $tags[0];
+        $this->assertEquals('seiffert.helper.controller', $tag['broker']);
     }
 }

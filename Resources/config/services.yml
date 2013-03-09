@@ -1,0 +1,9 @@
+parameters:
+    seiffert.helper.controller.router.class: Seiffert\ControllerHelperBundle\Helper\RouterHelper
+
+services:
+    seiffert.helper.controller.router:
+        class: %seiffert.helper.controller.router.class%
+        arguments: [ @?router ]
+        tags:
+            - { name: seiffert.helper, broker: seiffert.helper.controller }

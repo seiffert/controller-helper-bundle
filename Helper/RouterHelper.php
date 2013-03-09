@@ -2,6 +2,7 @@
 
 namespace Seiffert\ControllerHelperBundle\Helper;
 
+use Seiffert\ControllerHelperBundle\Exception\MissingDependencyException;
 use Seiffert\HelperBundle\HelperInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -15,7 +16,7 @@ class RouterHelper implements HelperInterface
     /**
      * @param UrlGeneratorInterface $urlGenerator
      */
-    public function __construct(UrlGeneratorInterface $urlGenerator)
+    public function __construct(UrlGeneratorInterface $urlGenerator = null)
     {
         $this->urlGenerator = $urlGenerator;
     }
@@ -33,9 +34,14 @@ class RouterHelper implements HelperInterface
      * @param array $parameters
      * @param string $referenceType
      * @return string
+     * @throws MissingDependencyException
      */
     public function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::RELATIVE_PATH)
     {
+        if (null === $this->urlGenerator) {
+            throw new MissingDependencyException('No router present.');
+        }
+
         return $this->urlGenerator->generate($route, $parameters, $referenceType);
     }
 }

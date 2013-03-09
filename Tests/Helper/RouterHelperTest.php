@@ -55,6 +55,14 @@ class RouterHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($result, $url);
     }
 
+    public function testGenerateUrlThrowsExceptionInCaseOfMissingRouter()
+    {
+        $this->helper = new RouterHelper();
+
+        $this->setExpectedException('Seiffert\ControllerHelperBundle\Exception\MissingDependencyException');
+        $this->helper->generateUrl('test');
+    }
+
     /**
      * @return Router|\PHPUnit_Framework_MockObject_MockObject
      */
