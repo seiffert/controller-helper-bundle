@@ -2,6 +2,7 @@ parameters:
     seiffert.helper.controller.router.class: Seiffert\ControllerHelperBundle\Helper\RouterHelper
     seiffert.helper.controller.template.class: Seiffert\ControllerHelperBundle\Helper\TemplateHelper
     seiffert.helper.controller.flash_message.class: Seiffert\ControllerHelperBundle\Helper\FlashMessageHelper
+    seiffert.helper.controller.security.class: Seiffert\ControllerHelperBundle\Helper\SecurityHelper
 
 services:
     seiffert.helper.controller.router:
@@ -19,5 +20,11 @@ services:
     seiffert.helper.controller.flash_message:
         class: %seiffert.helper.controller.flash_message.class%
         arguments: [ @?session ]
+        tags:
+            - { name: seiffert.helper, broker: seiffert.helper.controller }
+
+    seiffert.helper.controller.security:
+        class: %seiffert.helper.controller.security.class%
+        arguments: [ @?security.context ]
         tags:
             - { name: seiffert.helper, broker: seiffert.helper.controller }

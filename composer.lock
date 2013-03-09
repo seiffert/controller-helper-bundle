@@ -1,5 +1,5 @@
 {
-    "hash": "118824a11c26ae6137a8d2158d9fc564",
+    "hash": "67a90400775f0660714b9279f52f4e86",
     "packages": [
         {
             "name": "doctrine/common",
@@ -115,12 +115,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/seiffert/helper-bundle.git",
-                "reference": "abc6a835c0d4640ea5e1597f0b7d3c395ff805c5"
+                "reference": "ac0875c8cfcfe95e69b06380afb8ecddbe5f663c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/seiffert/helper-bundle/zipball/abc6a835c0d4640ea5e1597f0b7d3c395ff805c5",
-                "reference": "abc6a835c0d4640ea5e1597f0b7d3c395ff805c5",
+                "url": "https://api.github.com/repos/seiffert/helper-bundle/zipball/ac0875c8cfcfe95e69b06380afb8ecddbe5f663c",
+                "reference": "ac0875c8cfcfe95e69b06380afb8ecddbe5f663c",
                 "shasum": ""
             },
             "require": {
@@ -143,7 +143,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "This bundle provides a structure for helper objects.",
-            "time": "2013-03-09 17:43:01"
+            "time": "2013-03-09 18:10:27"
         },
         {
             "name": "symfony/config",
@@ -591,6 +591,72 @@
             "description": "Symfony Routing Component",
             "homepage": "http://symfony.com",
             "time": "2013-02-11 11:24:47"
+        },
+        {
+            "name": "symfony/security",
+            "version": "v2.2.0",
+            "target-dir": "Symfony/Component/Security",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Security.git",
+                "reference": "v2.2.0-RC3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Security/zipball/v2.2.0-RC3",
+                "reference": "v2.2.0-RC3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/event-dispatcher": ">=2.1,<3.0",
+                "symfony/http-foundation": ">=2.1,<2.3-dev",
+                "symfony/http-kernel": ">=2.1,<=2.3-dev"
+            },
+            "require-dev": {
+                "doctrine/common": ">=2.2,<3.0",
+                "doctrine/dbal": ">=2.2,<3.0",
+                "psr/log": ">=1.0,<2.0",
+                "symfony/form": ">=2.0,<3.0",
+                "symfony/routing": ">=2.2,<2.3-dev",
+                "symfony/validator": ">=2.2,<2.3-dev"
+            },
+            "suggest": {
+                "doctrine/dbal": "to use the built-in ACL implementation",
+                "symfony/class-loader": "2.2.*",
+                "symfony/finder": "2.2.*",
+                "symfony/form": "2.2.*",
+                "symfony/routing": "2.2.*",
+                "symfony/validator": "2.2.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Security\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Security Component",
+            "homepage": "http://symfony.com",
+            "time": "2013-02-23 06:46:07"
         },
         {
             "name": "symfony/stopwatch",

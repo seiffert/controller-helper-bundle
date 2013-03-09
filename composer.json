@@ -3,7 +3,8 @@
     "description": "This bundle provides some basic helpers for controllers.",
     "require": {
         "php": ">=5.3.3",
-        "seiffert/helper-bundle": "dev-master"
+        "seiffert/helper-bundle": "dev-master",
+        "symfony/security": "*"
     },
     "require-dev": {
         "phpmd/phpmd": "1.4.0",
