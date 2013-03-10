@@ -17,9 +17,17 @@ class SeiffertControllerHelperExtensionTest extends \PHPUnit_Framework_TestCase
      */
     private $extension;
 
+    /**
+     * @var ContainerBuilder
+     */
+    private $container;
+
     public function setUp()
     {
         $this->extension = new SeiffertControllerHelperExtension();
+        $this->container = new ContainerBuilder();
+
+        $this->extension->load(array(), $this->container);
     }
 
     public function testInstantiation()
@@ -34,126 +42,144 @@ class SeiffertControllerHelperExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function testExtensionProvidesRouterHelper()
     {
-        $containerBuilder = new ContainerBuilder();
+        $id = 'seiffert.helper.controller.router';
 
-        $this->extension->load(array(), $containerBuilder);
-
-        $this->assertTrue($containerBuilder->hasDefinition('seiffert.helper.controller.router'));
-        $definition = $containerBuilder->getDefinition('seiffert.helper.controller.router');
-
-        $this->assertEquals(
-            'Seiffert\ControllerHelperBundle\Helper\RouterHelper',
-            $containerBuilder->getParameter(str_replace('%', '', $definition->getClass()))
+        $this->assertServiceHasClass($id, 'Seiffert\ControllerHelperBundle\Helper\RouterHelper');
+        $this->assertServiceHasOneArgument(
+            $id,
+            new Reference('router', ContainerInterface::IGNORE_ON_INVALID_REFERENCE)
         );
-        $this->assertCount(1, $definition->getArguments());
-
-        $routerReference = new Reference('router', ContainerInterface::IGNORE_ON_INVALID_REFERENCE);
-        $this->assertEquals($routerReference, $definition->getArgument(0));
-
-        $tags = $definition->getTag('seiffert.helper');
-        $this->assertCount(1, $tags);
-
-        $tag = $tags[0];
-        $this->assertEquals('seiffert.helper.controller', $tag['broker']);
+        $this->assertServiceIsHelperAtBroker($id, 'seiffert.helper.controller');
     }
 
     public function testExtensionProvidesTemplateHelper()
     {
-        $containerBuilder = new ContainerBuilder();
+        $id = 'seiffert.helper.controller.template';
 
-        $this->extension->load(array(), $containerBuilder);
-
-        $this->assertTrue($containerBuilder->hasDefinition('seiffert.helper.controller.template'));
-        $definition = $containerBuilder->getDefinition('seiffert.helper.controller.template');
-
-        $this->assertEquals(
-            'Seiffert\ControllerHelperBundle\Helper\TemplateHelper',
-            $containerBuilder->getParameter(str_replace('%', '', $definition->getClass()))
+        $this->assertServiceHasClass($id, 'Seiffert\ControllerHelperBundle\Helper\TemplateHelper');
+        $this->assertServiceHasOneArgument(
+            $id,
+            new Reference('templating', ContainerInterface::IGNORE_ON_INVALID_REFERENCE)
         );
-        $this->assertCount(1, $definition->getArguments());
-
-        $routerReference = new Reference('templating', ContainerInterface::IGNORE_ON_INVALID_REFERENCE);
-        $this->assertEquals($routerReference, $definition->getArgument(0));
-
-        $tags = $definition->getTag('seiffert.helper');
-        $this->assertCount(1, $tags);
-
-        $tag = $tags[0];
-        $this->assertEquals('seiffert.helper.controller', $tag['broker']);
+        $this->assertServiceIsHelperAtBroker($id, 'seiffert.helper.controller');
     }
 
     public function testExtensionProvidesFlashMessageHelper()
     {
-        $containerBuilder = new ContainerBuilder();
+        $id = 'seiffert.helper.controller.flash_message';
 
-        $this->extension->load(array(), $containerBuilder);
-
-        $this->assertTrue($containerBuilder->hasDefinition('seiffert.helper.controller.flash_message'));
-        $definition = $containerBuilder->getDefinition('seiffert.helper.controller.flash_message');
-
-        $this->assertEquals(
-            'Seiffert\ControllerHelperBundle\Helper\FlashMessageHelper',
-            $containerBuilder->getParameter(str_replace('%', '', $definition->getClass()))
+        $this->assertServiceHasClass($id, 'Seiffert\ControllerHelperBundle\Helper\FlashMessageHelper');
+        $this->assertServiceHasOneArgument(
+            $id,
+            new Reference('session', ContainerInterface::IGNORE_ON_INVALID_REFERENCE)
         );
-        $this->assertCount(1, $definition->getArguments());
-
-        $routerReference = new Reference('session', ContainerInterface::IGNORE_ON_INVALID_REFERENCE);
-        $this->assertEquals($routerReference, $definition->getArgument(0));
-
-        $tags = $definition->getTag('seiffert.helper');
-        $this->assertCount(1, $tags);
-
-        $tag = $tags[0];
-        $this->assertEquals('seiffert.helper.controller', $tag['broker']);
+        $this->assertServiceIsHelperAtBroker($id, 'seiffert.helper.controller');
     }
 
     public function testExtensionProvidesSecurityHelper()
     {
-        $containerBuilder = new ContainerBuilder();
+        $id = 'seiffert.helper.controller.security';
 
-        $this->extension->load(array(), $containerBuilder);
-
-        $this->assertTrue($containerBuilder->hasDefinition('seiffert.helper.controller.security'));
-        $definition = $containerBuilder->getDefinition('seiffert.helper.controller.security');
-
-        $this->assertEquals(
-            'Seiffert\ControllerHelperBundle\Helper\SecurityHelper',
-            $containerBuilder->getParameter(str_replace('%', '', $definition->getClass()))
+        $this->assertServiceHasClass($id, 'Seiffert\ControllerHelperBundle\Helper\SecurityHelper');
+        $this->assertServiceHasOneArgument(
+            $id,
+            new Reference('security.context', ContainerInterface::IGNORE_ON_INVALID_REFERENCE)
         );
-        $this->assertCount(1, $definition->getArguments());
-
-        $routerReference = new Reference('security.context', ContainerInterface::IGNORE_ON_INVALID_REFERENCE);
-        $this->assertEquals($routerReference, $definition->getArgument(0));
-
-        $tags = $definition->getTag('seiffert.helper');
-        $this->assertCount(1, $tags);
-
-        $tag = $tags[0];
-        $this->assertEquals('seiffert.helper.controller', $tag['broker']);
+        $this->assertServiceIsHelperAtBroker($id, 'seiffert.helper.controller');
     }
 
     public function testExtensionProvidesFormHelper()
     {
-        $containerBuilder = new ContainerBuilder();
+        $id = 'seiffert.helper.controller.form';
 
-        $this->extension->load(array(), $containerBuilder);
-
-        $this->assertTrue($containerBuilder->hasDefinition('seiffert.helper.controller.form'));
-        $definition = $containerBuilder->getDefinition('seiffert.helper.controller.form');
-
-        $this->assertEquals(
-            'Seiffert\ControllerHelperBundle\Helper\FormHelper',
-            $containerBuilder->getParameter(str_replace('%', '', $definition->getClass()))
+        $this->assertServiceHasClass($id, 'Seiffert\ControllerHelperBundle\Helper\FormHelper');
+        $this->assertServiceHasOneArgument(
+            $id,
+            new Reference('form.factory', ContainerInterface::IGNORE_ON_INVALID_REFERENCE)
         );
-        $this->assertCount(1, $definition->getArguments());
+        $this->assertServiceIsHelperAtBroker($id, 'seiffert.helper.controller');
+    }
 
-        $routerReference = new Reference('form.factory', ContainerInterface::IGNORE_ON_INVALID_REFERENCE);
-        $this->assertEquals($routerReference, $definition->getArgument(0));
+    public function testExtensionProvidesDoctrineHelper()
+    {
+        $id = 'seiffert.helper.controller.doctrine';
 
-        $tags = $definition->getTag('seiffert.helper');
-        $this->assertCount(1, $tags);
+        $this->assertServiceHasClass($id, 'Seiffert\ControllerHelperBundle\Helper\DoctrineHelper');
+        $this->assertServiceHasOneArgument(
+            $id,
+            new Reference('doctrine.orm.entity_manager', ContainerInterface::IGNORE_ON_INVALID_REFERENCE)
+        );
+        $this->assertServiceIsHelperAtBroker($id, 'seiffert.helper.controller');
+    }
 
-        $tag = $tags[0];
-        $this->assertEquals('seiffert.helper.controller', $tag['broker']);
+    /**
+     * @param string $serviceId
+     * @param string $className
+     */
+    private function assertServiceHasClass($serviceId, $className)
+    {
+        $this->assertTrue($this->container->hasDefinition($serviceId));
+        $definition = $this->container->getDefinition($serviceId);
+
+        $this->assertEquals($className, $this->container->getParameter(str_replace('%', '', $definition->getClass())));
+    }
+
+    /**
+     * @param string $serviceId
+     * @param mixed $argument
+     */
+    private function assertServiceHasOneArgument($serviceId, $argument)
+    {
+        $definition = $this->container->getDefinition($serviceId);
+
+        $this->assertCount(
+            1,
+            $definition->getArguments(),
+            sprintf('Number of arguments of service %s does not equal 1', $serviceId)
+        );
+        $this->assertEquals($argument, $definition->getArgument(0), 'Argument 0 does not match expected value');
+    }
+
+    /**
+     * @param string $serviceId
+     * @param string $broker
+     */
+    private function assertServiceIsHelperAtBroker($serviceId, $broker)
+    {
+        $this->assertServiceHasTag(
+            $serviceId,
+            'seiffert.helper',
+            array('broker' => $broker)
+        );
+    }
+
+    /**
+     * @param int $serviceId
+     * @param string $tagName
+     * @param array $tagAttributes
+     */
+    private function assertServiceHasTag($serviceId, $tagName, $tagAttributes)
+    {
+        $definition = $this->container->getDefinition($serviceId);
+
+        $this->assertTrue(
+            $definition->hasTag($tagName),
+            sprintf('Service %s does not have tag %s', $serviceId, $tagName)
+        );
+        $tag = array_pop($definition->getTag($tagName));
+
+        foreach ($tagAttributes as $key => $value) {
+            $this->assertEquals(
+                $tag[$key],
+                $value,
+                sprintf(
+                    'Tag attribute %s of tag %s of service %s does not have expected value %s',
+                    $key,
+                    $tagName,
+                    $serviceId,
+                    $value
+                )
+            );
+        }
     }
 }
