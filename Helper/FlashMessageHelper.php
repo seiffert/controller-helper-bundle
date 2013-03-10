@@ -24,7 +24,7 @@ class FlashMessageHelper implements HelperInterface
     /**
      * @return string[]|array
      */
-    public function getHelperMethodNames()
+    public static function getHelperMethodNames()
     {
         return array('addFlashMessage');
     }

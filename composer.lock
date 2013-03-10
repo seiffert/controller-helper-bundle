@@ -115,12 +115,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/seiffert/helper-bundle.git",
-                "reference": "ac0875c8cfcfe95e69b06380afb8ecddbe5f663c"
+                "reference": "dcf92222b2b0bb54f397d891d1ae3372cea55266"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/seiffert/helper-bundle/zipball/ac0875c8cfcfe95e69b06380afb8ecddbe5f663c",
-                "reference": "ac0875c8cfcfe95e69b06380afb8ecddbe5f663c",
+                "url": "https://api.github.com/repos/seiffert/helper-bundle/zipball/dcf92222b2b0bb54f397d891d1ae3372cea55266",
+                "reference": "dcf92222b2b0bb54f397d891d1ae3372cea55266",
                 "shasum": ""
             },
             "require": {
@@ -143,7 +143,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "This bundle provides a structure for helper objects.",
-            "time": "2013-03-09 18:10:27"
+            "time": "2013-03-10 18:30:20"
         },
         {
             "name": "symfony/config",

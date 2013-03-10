@@ -34,7 +34,7 @@ class RouterHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testHasGenerateUrlHelperMethod()
     {
-        $this->assertContains('generateUrl', $this->helper->getHelperMethodNames());
+        $this->assertContains('generateUrl', RouterHelper::getHelperMethodNames());
     }
 
     public function testGenerateUrlCallsRouter()

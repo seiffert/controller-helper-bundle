@@ -45,7 +45,7 @@ class FlashMessageHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testHelperProvidesAddFlashMessageMethod()
     {
-        $this->assertContains('addFlashMessage', $this->helper->getHelperMethodNames());
+        $this->assertContains('addFlashMessage', FlashMessageHelper::getHelperMethodNames());
     }
 
     public function testThrowsExceptionWithoutSession()

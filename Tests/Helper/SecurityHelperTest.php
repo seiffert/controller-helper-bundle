@@ -40,7 +40,7 @@ class SecurityHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testHelperProvidesGetCurrentUserMethod()
     {
-        $this->assertContains('getCurrentUser', $this->helper->getHelperMethodNames());
+        $this->assertContains('getCurrentUser', SecurityHelper::getHelperMethodNames());
     }
 
     public function testHelperRequiresSecurityContext()

@@ -23,7 +23,7 @@ class DoctrineHelper implements HelperInterface
     /**
      * @return string[]|array
      */
-    public function getHelperMethodNames()
+    public static function getHelperMethodNames()
     {
         return array('getEntityManager', 'persist', 'flush');
     }

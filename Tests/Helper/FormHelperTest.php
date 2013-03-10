@@ -40,7 +40,7 @@ class FormHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testHelperProvidesCreateFormMethod()
     {
-        $this->assertContains('createForm', $this->helper->getHelperMethodNames());
+        $this->assertContains('createForm', FormHelper::getHelperMethodNames());
     }
 
     public function testHelperRequiresFormFactory()

@@ -38,7 +38,7 @@ class DoctrineHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testHelperProvidesGetEntityManagerMethod()
     {
-        $this->assertContains('getEntityManager', $this->helper->getHelperMethodNames());
+        $this->assertContains('getEntityManager', DoctrineHelper::getHelperMethodNames());
     }
 
     public function testGetEntityManager()
@@ -48,7 +48,7 @@ class DoctrineHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testHelperProvidesPersistMethod()
     {
-        $this->assertContains('persist', $this->helper->getHelperMethodNames());
+        $this->assertContains('persist', DoctrineHelper::getHelperMethodNames());
     }
 
     public function testPersistCallsEntityManager()
@@ -65,7 +65,7 @@ class DoctrineHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testHelperProvidesFlushMethod()
     {
-        $this->assertContains('flush', $this->helper->getHelperMethodNames());
+        $this->assertContains('flush', DoctrineHelper::getHelperMethodNames());
     }
 
     public function testFlushCallsEntityManager()

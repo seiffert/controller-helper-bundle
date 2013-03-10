@@ -35,7 +35,7 @@ class TemplateHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testHelperHasRenderResponseMethod()
     {
-        $this->assertContains('render', $this->helper->getHelperMethodNames());
+        $this->assertContains('render', TemplateHelper::getHelperMethodNames());
     }
 
     public function testRenderCallsTemplatingEngine()
