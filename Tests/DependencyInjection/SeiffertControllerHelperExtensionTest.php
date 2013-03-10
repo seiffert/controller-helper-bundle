@@ -166,7 +166,8 @@ class SeiffertControllerHelperExtensionTest extends \PHPUnit_Framework_TestCase
             $definition->hasTag($tagName),
             sprintf('Service %s does not have tag %s', $serviceId, $tagName)
         );
-        $tag = array_pop($definition->getTag($tagName));
+        $tags = $definition->getTag($tagName);
+        $tag = array_pop($tags);
 
         foreach ($tagAttributes as $key => $value) {
             $this->assertEquals(
