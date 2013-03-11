@@ -3,6 +3,7 @@
 namespace Seiffert\ControllerHelperBundle\Helper;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectRepository;
 use Seiffert\HelperBundle\HelperInterface;
 
 class DoctrineHelper implements HelperInterface
@@ -25,7 +26,7 @@ class DoctrineHelper implements HelperInterface
      */
     public static function getHelperMethodNames()
     {
-        return array('getEntityManager', 'persist', 'flush');
+        return array('getEntityManager', 'persist', 'flush', 'getRepository');
     }
 
     /**
@@ -50,5 +51,14 @@ class DoctrineHelper implements HelperInterface
     public function flush($entity = null)
     {
         $this->entityManager->flush($entity);
+    }
+
+    /**
+     * @param string $entity
+     * @return ObjectRepository
+     */
+    public function getRepository($entity)
+    {
+        return $this->entityManager->getRepository($entity);
     }
 }

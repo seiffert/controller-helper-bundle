@@ -80,6 +80,25 @@ class DoctrineHelperTest extends \PHPUnit_Framework_TestCase
         $this->helper->flush($entity);
     }
 
+    public function testHelperProvidesGetRepositoryMethod()
+    {
+        $this->assertContains('getRepository', DoctrineHelper::getHelperMethodNames());
+    }
+
+    public function testGetRepositoryCallsEntityManager()
+    {
+        $entity = 'test';
+        $repository = 'foo';
+
+        $this->getMockEntityManager()
+            ->expects($this->once())
+            ->method('getRepository')
+            ->with($entity)
+            ->will($this->returnValue($repository));
+
+        $this->assertSame($repository, $this->helper->getRepository($entity));
+    }
+
     /**
      * @return ObjectManager|\PHPUnit_Framework_MockObject_MockObject
      */
