@@ -63,6 +63,20 @@ class RouterHelperTest extends \PHPUnit_Framework_TestCase
         $this->helper->generateUrl('test');
     }
 
+    public function testGenerateUrlDefaultReferenceType()
+    {
+        $route = 'test';
+        $url = '/foo/bar';
+
+        $this->getMockRouter()
+            ->expects($this->once())
+            ->method('generate')
+            ->with($route, array(), UrlGeneratorInterface::ABSOLUTE_PATH)
+            ->will($this->returnValue($url));
+
+        $this->assertSame($url, $this->helper->generateUrl($route));
+    }
+
     /**
      * @return Router|\PHPUnit_Framework_MockObject_MockObject
      */

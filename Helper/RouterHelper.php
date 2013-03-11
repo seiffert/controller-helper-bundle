@@ -36,7 +36,7 @@ class RouterHelper implements HelperInterface
      * @return string
      * @throws MissingDependencyException
      */
-    public function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::RELATIVE_PATH)
+    public function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
     {
         if (null === $this->urlGenerator) {
             throw new MissingDependencyException('No router present.');
