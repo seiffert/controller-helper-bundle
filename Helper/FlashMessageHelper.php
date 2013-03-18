@@ -11,7 +11,7 @@ class FlashMessageHelper implements HelperInterface
     /**
      * @var Session
      */
-    private $session;
+    protected $session;
 
     /**
      * @param Session $session
