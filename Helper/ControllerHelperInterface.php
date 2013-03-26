@@ -83,4 +83,9 @@ interface ControllerHelperInterface
      * @return StreamedResponse
      */
     public function stream($template, $arguments = array(), StreamedResponse $response = null);
+
+    /**
+     * @param mixed $data
+     */
+    public function validate($data);
 }
