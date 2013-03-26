@@ -100,6 +100,18 @@ class SeiffertControllerHelperExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertServiceIsHelperAtBroker($id, 'seiffert.helper.controller');
     }
 
+    public function testExtensionProvidesValidatorHelper()
+    {
+        $id = 'seiffert.helper.controller.validator';
+
+        $this->assertServiceHasClass($id, 'Seiffert\ControllerHelperBundle\Helper\ValidatorHelper');
+        $this->assertServiceHasOneArgument(
+            $id,
+            new Reference('validator', ContainerInterface::IGNORE_ON_INVALID_REFERENCE)
+        );
+        $this->assertServiceIsHelperAtBroker($id, 'seiffert.helper.controller');
+    }
+
     public function testExtensionProvidesDoctrineHelper()
     {
         $id = 'seiffert.helper.controller.doctrine';
