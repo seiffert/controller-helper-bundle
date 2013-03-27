@@ -30,6 +30,7 @@ class SecurityHelperTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->mockSecurityContext = null;
+        $this->helper = null;
     }
 
     public function testInstantiation()
@@ -43,13 +44,27 @@ class SecurityHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('getCurrentUser', SecurityHelper::getHelperMethodNames());
     }
 
-    public function testHelperRequiresSecurityContext()
+    public function testHelperProvidesIsGrantedMethod()
+    {
+        $this->assertContains('isGranted', SecurityHelper::getHelperMethodNames());
+    }
+
+    public function testGetCurrentUserRequiresSecurityContext()
     {
         $this->helper = new SecurityHelper();
 
         $this->setExpectedException('Seiffert\ControllerHelperBundle\Exception\MissingDependencyException');
 
         $this->helper->getCurrentUser();
+    }
+
+    public function testIsGrantedRequiresSecurityContext()
+    {
+        $this->helper = new SecurityHelper();
+
+        $this->setExpectedException('Seiffert\ControllerHelperBundle\Exception\MissingDependencyException');
+
+        $this->helper->isGranted('ROLE_USER');
     }
 
     public function testGetCurrentUserRequiresToken()
@@ -61,6 +76,17 @@ class SecurityHelperTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException('Seiffert\ControllerHelperBundle\Exception\NotAuthenticatedException');
         $this->helper->getCurrentUser();
+    }
+
+    public function testIsGrantedRequiresToken()
+    {
+        $this->getMockSecurityContext()
+            ->expects($this->once())
+            ->method('getToken')
+            ->will($this->returnValue(null));
+
+        $this->setExpectedException('Seiffert\ControllerHelperBundle\Exception\NotAuthenticatedException');
+        $this->helper->isGranted('ROLE_USER');
     }
 
     public function testGetCurrentUserSuccess()
@@ -86,6 +112,32 @@ class SecurityHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($user, $this->helper->getCurrentUser());
     }
 
+    public function testIsGranted()
+    {
+        $item = 'ROLE_USER';
+
+        $token = $this->getMock(
+            'Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken',
+            array('getUser'),
+            array(),
+            '',
+            false
+        );
+
+        $this->getMockSecurityContext()
+            ->expects($this->atLeastOnce())
+            ->method('getToken')
+            ->will($this->returnValue($token));
+
+        $this->getMockSecurityContext()
+            ->expects($this->any())
+            ->method('isGranted')
+            ->with($item, null)
+            ->will($this->returnValue(true));
+
+        $this->assertTrue($this->helper->isGranted($item));
+    }
+
     /**
      * @return SecurityContext|\PHPUnit_Framework_MockObject_MockObject
      */
@@ -93,8 +145,8 @@ class SecurityHelperTest extends \PHPUnit_Framework_TestCase
     {
         if (null === $this->mockSecurityContext) {
             $this->mockSecurityContext = $this->getMock(
-                'Symfony\Component\Security\Core\SecurityContext',
-                array('getToken'),
+                'Symfony\Component\Security\Core\SecurityContextInterface',
+                array('getToken', 'isGranted', 'setToken'),
                 array(),
                 '',
                 false

@@ -1,5 +1,6 @@
 {
     "name": "seiffert/controller-helper-bundle",
+    "version": "0.1",
     "description": "This bundle provides some basic helpers for controllers.",
     "require": {
         "php": ">=5.3.3",

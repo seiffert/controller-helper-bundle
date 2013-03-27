@@ -28,7 +28,7 @@ class SecurityHelper implements HelperInterface
      */
     public static function getHelperMethodNames()
     {
-        return array('getCurrentUser');
+        return array('getCurrentUser', 'isGranted');
     }
 
     /**
@@ -47,5 +47,25 @@ class SecurityHelper implements HelperInterface
         }
 
         return $this->securityContext->getToken()->getUser();
+    }
+
+    /**
+     * @param mixed $attributes
+     * @param object $object
+     * @return bool
+     * @throws MissingDependencyException
+     * @throws NotAuthenticatedException
+     */
+    public function isGranted($attributes, $object = null)
+    {
+        if (null === $this->securityContext) {
+            throw new MissingDependencyException('No security context present.');
+        }
+
+        if (!$this->securityContext->getToken()) {
+            throw new NotAuthenticatedException('User not authenticated.');
+        }
+
+        return $this->securityContext->isGranted($attributes, $object);
     }
 }

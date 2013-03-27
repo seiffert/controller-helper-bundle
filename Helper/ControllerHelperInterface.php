@@ -62,6 +62,13 @@ interface ControllerHelperInterface
     public function getCurrentUser();
 
     /**
+     * @param mixed $attributes
+     * @param mixed $object
+     * @return bool
+     */
+    public function isGranted($attributes, $object = null);
+
+    /**
      * @param string $template
      * @param array $arguments
      * @param Response $response
